@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simplified Blob Animation with Fixed Text</title>
+  <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+  <svg width="600" height="600" viewBox="0 0 600 600">
+    <!-- Blob Path -->
+    <path id="blob" class="blob-path" d="M 300,150 C 375,150 450,225 450,300 C 450,375 375,450 300,450 C 225,450 150,375 150,300 C 150,225 225,150 300,150 Z"></path>
+    
+    <!-- Fixed Circular Path for Text -->
+    <path id="text-circle" d="M 300,150 A 150,150 0 1,1 299,150 Z"></path>
+    <path id="text-circle2" d="M 300,150 A 150,150 0 1,1 299,150 Z"></path>
+
+    <!-- Text on Circular Path -->
+    <text class="path-text">
+      <textPath href="#text-circle" startOffset="0%">
+        van Griensven
+      </textPath>
+    </text>
+
+    <text class="path-text-2">
+      <textPath href="#text-circle2" startOffset="60%">
+        interieur
+      </textPath>
+    </text>
+  </svg>
+
+  <button class="button" onclick="window.print()">Download</button>
+
+  <script>
+  const blobPath = document.getElementById("blob");
+    
+    const centerX = 250;
+    const centerY = 250;
+    const maxRadius = 170; // Blob's maximum radius
+    const textPathRadiusIncrease = 10; // Increase for text paths
+    const deformAmount = 25; // Max offset for deformation
+    const interpolationSpeed = 0.1;
+    const minCornerRadius = 0; // Minimum corner radius
+    const maxCornerRadius = 40; // Maximum corner radius
+    
+    // Define initial anchor points around a circle with radius maxRadius
+    const anchors = Array.from({ length: 8 }, (_, i) => {
+      const angle = (i / 8) * (2 * Math.PI);
+      const x = centerX + maxRadius * Math.cos(angle);
+      const y = centerY + maxRadius * Math.sin(angle);
+      return {
+        baseX: x,
+        baseY: y,
+        x: x,
+        y: y,
+        targetX: x,
+        targetY: y,
+        cornerRadius: minCornerRadius,
+        targetCornerRadius: minCornerRadius
+      };
+    });
+    
+    function updateTargets() {
+      // Set new deformation targets for each anchor point
+      for (let i = 0; i < anchors.length; i++) {
+        const deformX = anchors[i].baseX + (Math.random() - 0.5) * deformAmount;
+        const deformY = anchors[i].baseY + (Math.random() - 0.5) * deformAmount;
+        const newCornerRadius = minCornerRadius + Math.random() * (maxCornerRadius - minCornerRadius);
+    
+        anchors[i].targetX = deformX;
+        anchors[i].targetY = deformY;
+        anchors[i].targetCornerRadius = newCornerRadius; // Randomize corner radius
+      }
+    }
+    
+    function randomizePath() {
+      // Smoothly interpolate each anchor point toward its target
+      for (let i = 0; i < anchors.length; i++) {
+        anchors[i].x += (anchors[i].targetX - anchors[i].x) * interpolationSpeed;
+        anchors[i].y += (anchors[i].targetY - anchors[i].y) * interpolationSpeed;
+        anchors[i].cornerRadius += (anchors[i].targetCornerRadius - anchors[i].cornerRadius) * interpolationSpeed;
+      }
+    
+      // Generate new path `d` attribute with dynamic rounded corners
+      const newPath = anchors.map((point, i) => {
+        const prevPoint = anchors[(i - 1 + anchors.length) % anchors.length];
+        const nextPoint = anchors[(i + 1) % anchors.length];
+    
+        // Calculate points for the rounded corner
+        const anglePrev = Math.atan2(point.y - prevPoint.y, point.x - prevPoint.x);
+        const angleNext = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
+    
+        const startX = point.x - Math.cos(anglePrev) * point.cornerRadius;
+        const startY = point.y - Math.sin(anglePrev) * point.cornerRadius;
+        const endX = point.x + Math.cos(angleNext) * point.cornerRadius;
+        const endY = point.y + Math.sin(angleNext) * point.cornerRadius;
+    
+        // Define the control points for smooth curves
+        return `
+          L ${startX},${startY} 
+          Q ${point.x},${point.y} ${endX},${endY}
+        `;
+      }).join(" ");
+    
+      // Close the path
+      blobPath.setAttribute("d", `M ${anchors[0].x},${anchors[0].y} ` + newPath + " Z");
+    
+    }
+        
+    // Update deformation targets every 2 seconds for smoother transitions
+    setInterval(updateTargets, 2000);
+    // Animate the path at intervals for smooth interpolation
+    setInterval(randomizePath, 50);
+  </script>
+</body>
+</html>

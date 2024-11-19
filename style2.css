@@ -1,0 +1,66 @@
+@font-face {
+  font-family: Cabinet;
+  src: url('./CabinetGrotesk-Regular.ttf');
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
+  margin: 0;
+  font-family: Cabinet;
+}
+svg {
+  overflow: visible;
+  width: 100vw;
+  height: 100vh;
+}
+.blob-path {
+  fill: #627771;
+  stroke: #fff;
+  stroke-width: 20;
+}
+
+
+.path-text {
+  font-size: 100px;
+  fill: #627771;
+}
+
+
+.path-text-2 {
+  font-size: 70px;
+  fill: #627771;
+}
+
+#text-circle{
+  fill: transparent;
+  transform: rotate(-100deg) scale(1.1);
+  transform-origin: center;
+}
+
+#text-circle2{
+  fill: transparent;
+  transform: rotate(70deg) scale(-1.38, 1.38);
+  transform-origin: center;
+}
+
+.button{
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  background: #627771;;
+  border: 2px solid #627771;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+@media print{
+  .button{
+    display: none;
+  }
+}
