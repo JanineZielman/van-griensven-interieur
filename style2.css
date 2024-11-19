@@ -47,6 +47,15 @@ svg {
   transform-origin: center;
 }
 
+.safari #text-circle{
+  transform: rotate(-100deg) scale(1.1) translate(220px,30px);
+}
+
+.safari #text-circle2{
+  transform: rotate(70deg) scale(-1.38, 1.38) translate(185px,140px);
+}
+
+
 .button{
   position: fixed;
   bottom: 14px;
@@ -62,5 +71,12 @@ svg {
 @media print{
   .button{
     display: none;
+  }
+  .safari #text-circle{
+    transform: rotate(-100deg) scale(1.1);
+  }
+
+  .safari #text-circle2{
+    transform: rotate(70deg) scale(-1.38, 1.38);
   }
 }

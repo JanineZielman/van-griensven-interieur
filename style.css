@@ -40,6 +40,11 @@ svg {
   transform-origin: center;
 }
 
+.safari .path-text-2 {
+  display: none;
+}
+
+
 .button{
   position: fixed;
   bottom: 14px;
@@ -56,4 +61,5 @@ svg {
   .button{
     display: none;
   }
+  
 }

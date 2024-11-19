@@ -6,7 +6,7 @@
   <title>Blob Animation with Text Interaction</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="body">
 
   <svg width="600" height="600" viewBox="0 0 600 600">
     <!-- Blob Path -->
@@ -133,6 +133,15 @@
     setInterval(updateTargets, 2000);
     // Animate the path at intervals for smooth interpolation
     setInterval(randomizePath, 50);
+
+    var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+                   navigator.userAgent &&
+                   navigator.userAgent.indexOf('CriOS') == -1 &&
+                   navigator.userAgent.indexOf('FxiOS') == -1;
+
+      if (isSafari == true ) {
+        document.getElementById('body').classList.add('safari');
+      }
     </script>
     
 

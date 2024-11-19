@@ -6,7 +6,7 @@
   <title>Simplified Blob Animation with Fixed Text</title>
   <link rel="stylesheet" href="style2.css">
 </head>
-<body>
+<body id="body">
   <svg width="600" height="600" viewBox="0 0 600 600">
     <!-- Blob Path -->
     <path id="blob" class="blob-path" d="M 300,150 C 375,150 450,225 450,300 C 450,375 375,450 300,450 C 225,450 150,375 150,300 C 150,225 225,150 300,150 Z"></path>
@@ -78,6 +78,15 @@
 
     setInterval(updateTargets, 2000);
     setInterval(randomizePath, 50);
+    
+    var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+                   navigator.userAgent &&
+                   navigator.userAgent.indexOf('CriOS') == -1 &&
+                   navigator.userAgent.indexOf('FxiOS') == -1;
+
+      if (isSafari == true ) {
+        document.getElementById('body').classList.add('safari');
+      }
   </script>
 </body>
 </html>
