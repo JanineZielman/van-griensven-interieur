@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.34 237.75">
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect y="0" width="251.34" height="237.75" style="fill: #fff; stroke-width: 0px;"/>
+    <g>
+      <text transform="translate(58.17 50.61) rotate(15.5)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;"><tspan x="0" y="0" style="letter-spacing: -.02em;">v</tspan><tspan x="15.88" y="0">an </tspan></text>
+      <text transform="translate(20.02 70.12) rotate(15.5)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;"><tspan x="0" y="0">grien</tspan><tspan x="70.48" y="0" style="letter-spacing: -.01em;">sv</tspan><tspan x="100.94" y="0">en</tspan></text>
+    </g>
+    <path d="m0,0v237.75h251.34V0H0Zm238.82,13.35v99l-27-18-45,21.4s5.15-30.4,9-30.4-9-13.53-9-13.53l-12.8-40.47s-32.2-18-36.85-18h121.65Zm-171.37-4.96l72.91,37.37,20.45,39.88s-10.21,36.91-10.98,39.69c0,0,0,0,0,0-.06.23-.06.22,0,0,.89-3.22-136.78-29.49-136.78-29.49l-2.66-52.03L67.45,8.38ZM10.39,112.35l3.42-4.63,108,22.63-22.61,27,4.61,27-9,18-54,9-30.42,18v-117Zm230.9,120.2l-221.28-2.21,82.98-19.91,37.62,4.43,74.13-6.64,28.77-24.34-2.21,48.68Zm2.09-58.9l-38.61,23.93-56.29,12.89-33.26-10.3-11.55-37.77,32.1-26.34,71.14-30.01,36.78,21.8-.3,45.8Z" style="fill: #627771; stroke-width: 0px;"/>
+    <text transform="translate(125.67 186.83) rotate(-19)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;"><tspan x="0" y="0">in</tspan><tspan x="25.06" y="0" style="letter-spacing: 0em;">t</tspan><tspan x="36.69" y="0">erieur</tspan></text>
+  </g>
+</svg>
