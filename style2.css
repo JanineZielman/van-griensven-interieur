@@ -1,6 +1,6 @@
 @font-face {
   font-family: Cabinet;
-  src: url('./CabinetGrotesk-Regular.ttf');
+  src: url('./CalibreMedium.otf');
 }
 
 body {
@@ -27,6 +27,7 @@ svg {
 .path-text {
   font-size: 100px;
   fill: #627771;
+  letter-spacing: -8px;
 }
 
 
