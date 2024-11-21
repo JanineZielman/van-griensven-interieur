@@ -6,7 +6,7 @@
   <title>Controlled Shape Animation</title>
   <link rel="stylesheet" href="style4.css">
 </head>
-<body>
+<body id="body">
   <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.34 237.75">
     <g id="Layer_1-2" data-name="Layer 1">
       <rect width="251.34" height="237.75" style="fill: #627771; stroke-width: 0px;"/>
@@ -118,6 +118,15 @@
   
     // Update polygons every 3 seconds
     setInterval(updatePolygons, 3000);
+
+    var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+                   navigator.userAgent &&
+                   navigator.userAgent.indexOf('CriOS') == -1 &&
+                   navigator.userAgent.indexOf('FxiOS') == -1;
+
+      if (isSafari == true ) {
+        document.getElementById('body').classList.add('safari');
+      }
   </script>
 </body>
 </html>
