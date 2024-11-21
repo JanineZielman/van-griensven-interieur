@@ -9,98 +9,115 @@
 <body>
   <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 251.34 237.75">
     <g id="Layer_1-2" data-name="Layer 1">
-      <rect y="0" width="251.34" height="237.75" style="fill: #fff; stroke-width: 0px;"/>
-      <g>
-        <text id="text1" transform="translate(58.17 50.61) rotate(15.5)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;">
-          <tspan x="0" y="0" style="letter-spacing: -.02em;">v</tspan><tspan x="15.88" y="0">an </tspan>
-        </text>
-        <text id="text2" transform="translate(20.02 70.12) rotate(15.5)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;">
-          <tspan x="0" y="0">grien</tspan><tspan x="70.48" y="0" style="letter-spacing: -.01em;">sv</tspan><tspan x="100.94" y="0">en</tspan>
-        </text>
-      </g>
-      <path id="animatedPath" d="m0,0v237.75h251.34V0H0Zm238.82,13.35v99l-27-18-45,21.4s5.15-30.4,9-30.4-9-13.53-9-13.53l-12.8-40.47s-32.2-18-36.85-18h121.65Zm-171.37-4.96l72.91,37.37,20.45,39.88s-10.21,36.91-10.98,39.69c0,0,0,0,0,0-.06.23-.06.22,0,0,.89-3.22-136.78-29.49-136.78-29.49l-2.66-52.03L67.45,8.38ZM10.39,112.35l3.42-4.63,108,22.63-22.61,27,4.61,27-9,18-54,9-30.42,18v-117Zm230.9,120.2l-221.28-2.21,82.98-19.91,37.62,4.43,74.13-6.64,28.77-24.34-2.21,48.68Zm2.09-58.9l-38.61,23.93-56.29,12.89-33.26-10.3-11.55-37.77,32.1-26.34,71.14-30.01,36.78,21.8-.3,45.8Z" 
-        style="fill: #627771; stroke-width: 0px;"/>
-      <text id="text3" transform="translate(125.67 186.83) rotate(-19)" style="fill: #627771; font-family: Calibre-Semibold, Calibre; font-size: 34px; font-weight: 600;">
-        <tspan x="0" y="0">in</tspan><tspan x="25.06" y="0" style="letter-spacing: 0em;">t</tspan><tspan x="36.69" y="0">erieur</tspan>
+      <rect width="251.34" height="237.75" style="fill: #627771; stroke-width: 0px;"/>
+      <polygon id="polygon1" points="29.73 101.34 5.41 118.72 4.97 194.73 35.82 220.8 109.44 176.49 106.19 101.34" style="fill: #fff; stroke-width: 0px;">
+        <animate attributeName="points" dur="3s" fill="freeze" />
+      </polygon>
+      <polygon id="polygon2" points="42.33 223.4 205.66 223.4 238.67 196.91 238.67 97 180.03 97.43 151.8 164.11" style="fill: #fff; stroke-width: 0px;">
+        <animate attributeName="points" dur="3s" fill="freeze" />
+      </polygon>
+      <polygon id="polygon3" points="170.48 14.9 235.2 11.42 236.07 91.35 176.56 90.92 149.19 157.38 117.91 171.28" style="fill: #fff; stroke-width: 0px;">
+        <animate attributeName="points" dur="3s" fill="freeze" />
+      </polygon>
+      <text transform="translate(6.38 41.75)" style="fill: #fff; font-family: Calibre-Medium, Calibre; font-size: 34px; font-weight: 500;">
+        <tspan style="letter-spacing: -.03em;"><tspan x="0" y="0">van </tspan></tspan>
+        <tspan style="letter-spacing: -.03em;"><tspan x="0" y="27">Griensven</tspan></tspan>
+        <tspan style="letter-spacing: -.03em;"><tspan x="0" y="54">interieur</tspan></tspan>
       </text>
     </g>
   </svg>
 
+  <button class="button" onclick="window.print()">Download</button>
+
   <script>
-    const path = document.getElementById('animatedPath');
-    const textElements = [document.getElementById('text1'), document.getElementById('text2'), document.getElementById('text3')];
-    const originalD = path.getAttribute('d');
-    const maxOffset = 3; // Smaller movement range to reduce crossing
-    const transitionSpeed = 0.1; // Slower transition for smooth animation
-    let targetPoints = [];
-
-    // Function to get a constrained offset
-    function getLimitedOffset(basePoint, directionFactor) {
-      return basePoint + (Math.random() - 0.5) * 2 * maxOffset * directionFactor;
+    // Get references to each polygon
+    const polygons = document.querySelectorAll("polygon");
+  
+    // Define the bounding box constraints (width and height of the rectangle)
+    const boundingBox = { width: 251.34, height: 237.75 };
+  
+    // Function to calculate the bounding box of a polygon given its points
+    function getBoundingBox(points) {
+      const coords = points.split(" ").map(p => p.split(",").map(Number));
+      const xs = coords.map(coord => coord[0]);
+      const ys = coords.map(coord => coord[1]);
+      const minX = Math.min(...xs);
+      const maxX = Math.max(...xs);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
+      return { minX, maxX, minY, maxY };
     }
-
-    // Initialize target points based on original path data
-    function initializeTargetPoints() {
-      const commands = originalD.split(/[ ,]/);
-      targetPoints = commands.map(value => isNaN(value) ? value : parseFloat(value));
+  
+    // Function to check if two bounding boxes overlap
+    function isOverlapping(box1, box2) {
+      return !(box1.maxX < box2.minX || box1.minX > box2.maxX || box1.maxY < box2.minY || box1.minY > box2.maxY);
     }
+  
+    // Function to generate random points within bounding constraints
+    function getRandomPoints(basePoints) {
+      return basePoints
+        .map(point => {
+          const [x, y] = point.split(",").map(Number);
+          const newX = Math.max(0, Math.min(boundingBox.width, x + (Math.random() - 0.5) * 30));
+          const newY = Math.max(0, Math.min(boundingBox.height, y + (Math.random() - 0.5) * 30));
+          return `${newX.toFixed(2)},${newY.toFixed(2)}`;
+        })
+        .join(" ");
+    }
+  
+    // Base points for each polygon (initial points in the SVG)
+    const polygonPoints = [
+      "29.73,101.34 5.41,118.72 4.97,194.73 35.82,220.8 109.44,176.49 106.19,101.34",  // First polygon
+      "42.33,223.4 205.66,223.4 238.67,196.91 238.67,97 180.03,97.43 151.8,164.11",    // Second polygon
+      "170.48,14.9 235.2,11.42 236.07,91.35 176.56,90.92 149.19,157.38 117.91,171.28"  // Third polygon
+    ];
+  
+    // Function to update polygon points every 3 seconds
+    function updatePolygons() {
+  const newPointsArray = []; // Array to store valid points for all polygons
+  const maxRetries = 10; // Maximum number of retries to avoid overlap
 
-    function updateTargetPoints() {
-      // Iterate through points and apply limited movement based on neighboring points
-      for (let i = 0; i < targetPoints.length; i++) {
-        if (!isNaN(targetPoints[i])) {
-          const originalPoint = parseFloat(targetPoints[i]);
-          let directionFactor = 1; // Can be adjusted based on specific path shape
+  polygons.forEach((polygon, index) => {
+    let newPoints;
+    let retries = 0;
+    let overlapping;
 
-          // Adjust the offset based on adjacency to avoid overlap
-          if (i > 0 && !isNaN(targetPoints[i - 1])) {
-            directionFactor = Math.abs(originalPoint - targetPoints[i - 1]) > maxOffset ? 0.5 : 1;
-          }
+    do {
+      // Generate random points for the current polygon
+      newPoints = getRandomPoints(polygonPoints[index].split(" "));
+      const newBox = getBoundingBox(newPoints);
 
-          targetPoints[i] = getLimitedOffset(originalPoint, directionFactor);
-        }
+      // Check for overlap with any already-processed polygons
+      overlapping = newPointsArray.some(existingPoints => 
+        isOverlapping(newBox, getBoundingBox(existingPoints))
+      );
+
+      retries++;
+      if (retries > maxRetries) {
+        console.warn(`Failed to find non-overlapping points for polygon ${index} after ${maxRetries} retries.`);
+        overlapping = false; // Allow progress even if overlap couldn't be resolved
       }
-      
-      // Apply subtle adjustments to text elements
-      textElements.forEach((text, index) => {
-        const originalTransform = text.getAttribute('transform');
-        const translateX = getLimitedOffset(0, 0.2); // Even smaller offset for text
-        const translateY = getLimitedOffset(0, 0.2);
-        text.setAttribute('transform', originalTransform + ` translate(${translateX} ${translateY})`);
-      });
-    }
+    } while (overlapping);
 
-    function animatePath() {
-      let newD = '';
-      const commands = path.getAttribute('d').split(/[ ,]/);
+    // Save the valid points and update the polygon
+    newPointsArray.push(newPoints);
 
-      for (let i = 0; i < commands.length; i++) {
-        if (!isNaN(commands[i]) && !isNaN(targetPoints[i])) {
-          // Move point closer to the target within transition speed
-          const currentValue = parseFloat(commands[i]);
-          const targetValue = targetPoints[i];
-          const updatedValue = currentValue + (targetValue - currentValue) * transitionSpeed;
-          newD += updatedValue + ' ';
-        } else {
-          newD += commands[i] + ' ';
-        }
-      }
+    // Set the 'to' attribute of the animate element to the new points
+    const animateElement = polygon.querySelector("animate");
+    animateElement.setAttribute("from", polygon.getAttribute("points"));
+    animateElement.setAttribute("to", newPoints);
 
-      path.setAttribute('d', newD.trim());
-    }
+    // Start the animation by restarting it
+    animateElement.beginElement();
 
-    // Initialize and set the interval to update points every 3 seconds
-    initializeTargetPoints();
-    setInterval(() => {
-      updateTargetPoints();
-    }, 3000);
+    // Update the actual points attribute as well for consistency
+    polygon.setAttribute("points", newPoints);
+  });
+}
 
-    // Start the animation loop
-    function startAnimationLoop() {
-      animatePath();
-      requestAnimationFrame(startAnimationLoop);
-    }
-    startAnimationLoop();
+  
+    // Update polygons every 3 seconds
+    setInterval(updatePolygons, 3000);
   </script>
 </body>
 </html>

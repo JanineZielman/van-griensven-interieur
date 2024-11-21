@@ -3,17 +3,58 @@ body{
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 svg{
-  height: 100vh;
-
+  max-height: 80vh;
+  width: auto;
+  max-width: 80%;
+  height: auto;
+  filter: invert(1);
+  border: 2px solid rgb(177,157,163);
 }
 
 svg text{
+  fill: #627771!important;
+  filter: invert(1);
   mix-blend-mode: difference;
 }
 
-*{
-  transition: all 0.4s ease;
+svg rect{
+  fill: #000!important;
+  mix-blend-mode: difference;
+}
+
+svg polygon {
+  fill: #627771!important;
+  filter: invert(1);
+  mix-blend-mode: difference;
+  transition: all 2s ease; /* Smooth 2-second transition for shape changes */
+}
+
+.button{
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  background: #627771;;
+  border: 2px solid #627771;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+@media print{
+  .button{
+    display: none;
+  }
+  .safari #text-circle{
+    transform: rotate(-100deg) scale(1.1);
+  }
+
+  .safari #text-circle2{
+    transform: rotate(70deg) scale(-1.38, 1.38);
+  }
 }
