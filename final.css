@@ -1,0 +1,71 @@
+@font-face {
+  font-family: Cabinet;
+  src: url('./CalibreMedium.woff2');
+}
+
+
+body{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Cabinet;
+}
+
+svg{
+  max-height: 80vh;
+  width: auto;
+  max-width: 80%;
+  height: 80vh;
+  filter: invert(1);
+  /* border: 2px solid rgb(177,157,163); */
+  transform: translate3d(0,0,0);
+  padding: 10px;
+}
+
+svg text{
+  fill: #627771!important;
+  filter: invert(1);
+  mix-blend-mode: difference;
+  font-family: Cabinet!important;
+}
+
+svg rect{
+  fill: #000!important;
+  mix-blend-mode: difference;
+}
+
+svg polygon {
+  fill: #627771!important;
+  filter: invert(1);
+  mix-blend-mode: difference;
+  transition: all 2s ease; /* Smooth 2-second transition for shape changes */
+}
+
+.button{
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  background: #627771;;
+  border: 2px solid #627771;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+.safari svg polygon{
+  fill: rgb(177,157,163)!important;
+}
+
+.safari svg text{
+  fill: rgb(177,157,163)!important;
+}
+
+@media print{
+  .button{
+    display: none;
+  }
+}
